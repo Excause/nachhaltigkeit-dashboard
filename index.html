@@ -9,6 +9,10 @@
     .dhbw-red { background-color: #c6001a; }
     .active { background-color: #a50016; }
     .delay { color: #c6001a; font-weight: bold; }
+    .relative {
+
+}
+
   </style>
 </head>
 <body class="flex min-h-screen bg-gray-100 text-gray-900">
@@ -16,6 +20,7 @@
   <aside class="w-64 dhbw-red text-white p-4">
     <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
     <nav class="space-y-2">
+      <button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('home')">Home</button>
       <button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('park')">Parkplätze</button>
       <button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('dhbw')">DHBW</button>
       <button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('train')">Zugverbindungen</button>
@@ -26,30 +31,34 @@
 
   <!-- Main Content -->
   <main class="flex-1 p-6">
-  <section id="home" class="animate-fade-in">
-    <div class="bg-white rounded-xl shadow p-6 text-center max-w-3xl mx-auto mt-12">
-      <h1 class="text-3xl font-bold mb-4 text-dhbw-red">Willkommen zum Nachhaltigkeitsdashboard</h1>
-      <p class="text-gray-700 text-lg mb-6">
-        Dieses Dashboard zeigt, wie Menschen den Bildungscampus nutzen – in Echtzeit. Von der Auslastung der Parkplätze über den Fahrradverleih bis hin zur Mensa – datenbasiert, transparent und nachhaltig.
-      </p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Bildungscampus_Heilbronn.jpg"
-           alt="Campus Heilbronn"
-           class="mx-auto mb-6 rounded shadow-md max-h-96 w-full object-cover"
-           loading="lazy">
+    <section id="home">
+  <div class="relative rounded-xl overflow-hidden mb-6">
+    <img src="img/bildungscampus-header.jpg" alt="Bildungscampus" class="w-full object-cover rounded-xl shadow">
+    <div class="absolute top-10 left-10 bg-white bg-opacity-80 px-6 py-4 rounded-xl shadow">
+      <h2 class="text-4xl font-extrabold">BILDUNGSCAMPUS</h2>
+      <p class="text-xl font-medium">Dieter Schwarz Stiftung</p>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
-<style>
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-in-out both;
-  }
-</style>
 
+
+    <section id="park" class="hidden">
+      <h2 class="text-xl font-semibold mb-4">Parkplätze</h2>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="bg-white rounded-xl shadow p-4">
+          <h3 class="text-lg font-medium">Parkhaus West</h3>
+          <p class="text-3xl font-bold text-dhbw-red">75% Auslastung</p>
+          <p class="text-sm text-gray-600">150 freie Parkplätze</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <h3 class="text-lg font-medium">Parkhaus Ost</h3>
+          <p class="text-3xl font-bold text-dhbw-red">60% Auslastung</p>
+          <p class="text-sm text-gray-600">240 freie Parkplätze</p>
+        </div>
+      </div>
+      <canvas id="parkingChart" class="mt-4 bg-white p-4 rounded-xl shadow"></canvas>
+    </section>
 
     <section id="dhbw" class="hidden">
       <h2 class="text-xl font-semibold mb-4">DHBW</h2>
@@ -116,27 +125,10 @@
     </section>
 
     <section id="bike" class="hidden">
-  <h2 class="text-xl font-semibold mb-4">Fahrradstellplätze</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="bg-white rounded-xl shadow p-4">
-      <h3 class="text-lg font-medium">Leihstation: Campus Süd</h3>
-      <div class="flex items-center mt-2">
-        <span class="inline-block w-3 h-3 rounded-full bg-green-500 animate-ping mr-2"></span>
-        <p class="text-3xl font-bold text-dhbw-red">8</p>
-      </div>
-      <p class="text-sm text-gray-600">Verfügbare Fahrräder</p>
-    </div>
-
-    <div class="bg-white rounded-xl shadow p-4">
-      <h3 class="text-lg font-medium">Leihstation: Bildungscampus Mitte</h3>
-      <div class="flex items-center mt-2">
-        <span class="inline-block w-3 h-3 rounded-full bg-green-500 animate-ping mr-2"></span>
-        <p class="text-3xl font-bold text-dhbw-red">5</p>
-      </div>
-      <p class="text-sm text-gray-600">Verfügbare Fahrräder</p>
-    </div>
-  </div>
-</section>
+      <h2 class="text-xl font-semibold mb-4">Fahrradstellplätze</h2>
+      <p>Belegte Stellplätze: 120</p>
+      <p>Freie Stellplätze: 30</p>
+    </section>
 
     <section id="mensa" class="hidden">
       <h2 class="text-xl font-semibold mb-4">Mensa</h2>
@@ -174,7 +166,8 @@
     }
 
     window.onload = function () {
-      // Mensa Chart
+     showSection('home');
+      // Mensa Chart<button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('home')">Home</button>
       const mensaCtx = document.getElementById('mensaChart')?.getContext('2d');
       if (mensaCtx) {
         new Chart(mensaCtx, {
