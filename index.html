@@ -26,22 +26,30 @@
 
   <!-- Main Content -->
   <main class="flex-1 p-6">
-    <section id="park" class="hidden">
-      <h2 class="text-xl font-semibold mb-4">Parkplätze</h2>
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div class="bg-white rounded-xl shadow p-4">
-          <h3 class="text-lg font-medium">Parkhaus West</h3>
-          <p class="text-3xl font-bold text-dhbw-red">75% Auslastung</p>
-          <p class="text-sm text-gray-600">150 freie Parkplätze</p>
-        </div>
-        <div class="bg-white rounded-xl shadow p-4">
-          <h3 class="text-lg font-medium">Parkhaus Ost</h3>
-          <p class="text-3xl font-bold text-dhbw-red">60% Auslastung</p>
-          <p class="text-sm text-gray-600">240 freie Parkplätze</p>
-        </div>
-      </div>
-      <canvas id="parkingChart" class="mt-4 bg-white p-4 rounded-xl shadow"></canvas>
-    </section>
+  <section id="home" class="animate-fade-in">
+    <div class="bg-white rounded-xl shadow p-6 text-center max-w-3xl mx-auto mt-12">
+      <h1 class="text-3xl font-bold mb-4 text-dhbw-red">Willkommen zum Nachhaltigkeitsdashboard</h1>
+      <p class="text-gray-700 text-lg mb-6">
+        Dieses Dashboard zeigt, wie Menschen den Bildungscampus nutzen – in Echtzeit. Von der Auslastung der Parkplätze über den Fahrradverleih bis hin zur Mensa – datenbasiert, transparent und nachhaltig.
+      </p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Bildungscampus_Heilbronn.jpg"
+           alt="Campus Heilbronn"
+           class="mx-auto mb-6 rounded shadow-md max-h-96 w-full object-cover"
+           loading="lazy">
+    </div>
+  </section>
+</main>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out both;
+  }
+</style>
+
 
     <section id="dhbw" class="hidden">
       <h2 class="text-xl font-semibold mb-4">DHBW</h2>
