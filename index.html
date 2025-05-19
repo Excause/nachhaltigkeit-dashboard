@@ -9,6 +9,10 @@
     .dhbw-red { background-color: #c6001a; }
     .active { background-color: #a50016; }
     .delay { color: #c6001a; font-weight: bold; }
+    .relative {
+
+}
+
   </style>
 </head>
 <body class="flex min-h-screen bg-gray-100 text-gray-900">
@@ -27,7 +31,33 @@
 
   <!-- Main Content -->
   <main class="flex-1 p-6">
-    <section id="home">...</section>
+    <section id="home">
+  <div class="relative rounded-xl overflow-hidden mb-6">
+    <img src="img/bildungscampus-header.jpg" alt="Bildungscampus" class="w-full object-cover rounded-xl shadow">
+    <div class="absolute top-10 left-10 bg-white bg-opacity-80 px-6 py-4 rounded-xl shadow">
+      <h2 class="text-4xl font-extrabold">BILDUNGSCAMPUS</h2>
+      <p class="text-xl font-medium">Dieter Schwarz Stiftung</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow mb-6 space-y-4">
+  <h2 class="text-2xl font-bold">Nachhaltigkeit sichtbar machen</h2>
+  <p class="text-gray-700 leading-relaxed">
+    Der Bildungscampus Heilbronn versteht sich nicht nur als Ort des Lernens, sondern auch als Vorreiter in Sachen nachhaltiger Entwicklung. Mit diesem Dashboard schaffen wir eine digitale Oberfläche, die zentrale Daten rund um Mobilität, Energieverbrauch und Campusleben bündelt und transparent macht.
+  </p>
+  <p class="text-gray-700 leading-relaxed">
+    Ziel ist es, sowohl Studierenden als auch Mitarbeitenden und Besucher:innen ein Bewusstsein für die ökologischen Auswirkungen ihres Handelns zu vermitteln. Die dargestellten Live-Daten – etwa zur Auslastung von Parkplätzen, zur CO₂-Einsparung durch digitale Lehre oder zur Nutzung öffentlicher Verkehrsmittel – liefern dabei konkrete Einblicke in das tägliche Geschehen auf dem Campus.
+  </p>
+  <p class="text-gray-700 leading-relaxed">
+    Darüber hinaus dient das Dashboard als Instrument zur Erfolgskontrolle von Maßnahmen und als Inspirationsquelle für zukünftige Projekte. Denn nachhaltiges Handeln beginnt bei der Sichtbarkeit – und genau hier setzt dieses Projekt an.
+  </p>
+  <blockquote class="border-l-4 border-dhbw-red pl-4 italic text-gray-600">
+    „Die Welt verändert sich durch dein Vorbild, nicht durch deine Meinung.“ – Paulo Coelho
+  </blockquote>
+</div>
+
+  </div>
+</section>
+
+
 
     <section id="park" class="hidden">
       <h2 class="text-xl font-semibold mb-4">Parkplätze</h2>
@@ -44,18 +74,99 @@
         </div>
       </div>
       <canvas id="parkingChart" class="mt-4 bg-white p-4 rounded-xl shadow"></canvas>
+    </section>
 
-      <!-- Live-Aktivität Parkhaus Ost -->
-      <div id="parkhausOstLive" class="bg-white p-4 rounded-xl shadow mt-6">
-        <h3 class="text-lg font-bold mb-2">Live-Aktivität: Parkhaus Ost</h3>
-        <ul id="parkhausOstList" class="list-disc list-inside text-gray-700 text-sm"></ul>
+    <section id="dhbw" class="hidden">
+      <h2 class="text-xl font-semibold mb-4">DHBW</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-white rounded-xl shadow p-4">
+          <h3 class="text-lg font-medium mb-2">CO₂-Einsparung</h3>
+          <p class="text-3xl font-bold text-dhbw-red">12%</p>
+          <p class="text-sm text-gray-600">durch Online-Lehre</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <h3 class="text-lg font-medium mb-2">Anreiseverhalten</h3>
+          <canvas id="commuteChart"></canvas>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4">
+        <h3 class="text-lg font-medium mb-2">Standort DHBW Heilbronn</h3>
+        <iframe
+          src="https://www.google.com/maps/d/u/0/embed?mid=17K0uU73GbaY3Gkg805YnWPdWskstU8A&ehbc=2E312F"
+          width="100%"
+          height="400"
+          class="rounded"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
       </div>
     </section>
 
-    <section id="dhbw" class="hidden">...</section>
-    <section id="train" class="hidden">...</section>
-    <section id="bike" class="hidden">...</section>
-    <section id="mensa" class="hidden">...</section>
+    <section id="train" class="hidden">
+      <h2 class="text-xl font-semibold mb-4">Zugverbindungen</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto bg-white rounded-xl shadow">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2 text-left">Zug</th>
+              <th class="px-4 py-2 text-left">Richtung</th>
+              <th class="px-4 py-2 text-left">Gleis</th>
+              <th class="px-4 py-2 text-left">Geplante Zeit</th>
+              <th class="px-4 py-2 text-left">Tatsächliche Zeit</th>
+              <th class="px-4 py-2 text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-2">RE 89</td>
+              <td class="px-4 py-2">Stuttgart</td>
+              <td class="px-4 py-2">4</td>
+              <td class="px-4 py-2">12:08</td>
+              <td class="px-4 py-2">12:15</td>
+              <td class="px-4 py-2 delay">+7 Min</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">RB 14</td>
+              <td class="px-4 py-2">Heidelberg</td>
+              <td class="px-4 py-2">2</td>
+              <td class="px-4 py-2">12:12</td>
+              <td class="px-4 py-2">12:12</td>
+              <td class="px-4 py-2 text-green-600">Pünktlich</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="bike" class="hidden">
+      <h2 class="text-xl font-semibold mb-4">Fahrradstellplätze</h2>
+      <p>Belegte Stellplätze: 120</p>
+      <p>Freie Stellplätze: 30</p>
+    </section>
+
+    <section id="mensa" class="hidden">
+      <h2 class="text-xl font-semibold mb-4">Mensa</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-white rounded-xl shadow p-4 relative">
+          <h3 class="text-lg font-medium">Aktuelle Besucherzahl</h3>
+          <div class="flex items-center mt-2">
+            <span class="inline-block w-3 h-3 rounded-full bg-green-500 animate-ping mr-2"></span>
+            <p class="text-3xl font-bold text-dhbw-red">122</p>
+          </div>
+          <p class="text-sm text-gray-600">Live-Daten</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <h3 class="text-lg font-medium">Heutiges Gericht</h3>
+          <p class="mt-2 text-lg">Vegetarisches Thai-Curry mit Reis</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4">
+        <h3 class="text-lg font-medium mb-2">Erwartete Auslastung über den Tag</h3>
+        <canvas id="mensaChart"></canvas>
+      </div>
+    </section>
   </main>
 
   <!-- Chart.js einbinden -->
@@ -70,40 +181,97 @@
       document.getElementById(id).classList.remove('hidden');
     }
 
-    async function fetchTrafficSensorBernardRaw() {
-      const apiKey = "Sy4G6TnzL5BLBMAurGvhvt62FZDFBj1Ws1ZGQ01SiBbsQNix";
-      const startTs = Date.now() - 60 * 60 * 1000; // letzte Stunde
-      const endTs = Date.now();
-
-      const url = "http://localhost:3000/api/events";
-
-
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        const events = json.timeseries.crossingLineEvent.map(e => JSON.parse(e.value));
-
-        console.log("📦 ALLE EVENTS (letzte Stunde):", events);
-
-        const list = document.getElementById("parkhausOstList");
-        list.innerHTML = "";
-
-        events.slice(-10).reverse().forEach(e => {
-          const li = document.createElement("li");
-          const time = new Date(e.timestamp).toLocaleTimeString("de-DE");
-          li.textContent = `${time} – ${e.class} (${e.direction}) – ${e.lineName}`;
-          list.appendChild(li);
-        });
-
-      } catch (err) {
-        console.error("❌ Fehler beim Abrufen:", err);
-      }
-    }
-
     window.onload = function () {
-      showSection('home');
-      fetchTrafficSensorBernardRaw();
-      setInterval(fetchTrafficSensorBernardRaw, 5 * 60 * 1000);
+     showSection('home');
+      // Mensa Chart<button class="w-full text-left p-2 rounded hover:bg-red-800" onclick="showSection('home')">Home</button>
+      const mensaCtx = document.getElementById('mensaChart')?.getContext('2d');
+      if (mensaCtx) {
+        new Chart(mensaCtx, {
+          type: 'bar',
+          data: {
+            labels: ['11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00'],
+            datasets: [{
+              label: 'Erwartete Besucher',
+              data: [100, 250, 500, 600, 400, 200, 100],
+              backgroundColor: '#c6001a'
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Besucheranzahl' }
+              },
+              x: {
+                title: { display: true, text: 'Uhrzeit' }
+              }
+            }
+          }
+        });
+      }
+
+      // Parkplatz Chart
+      const ctx = document.getElementById('parkingChart')?.getContext('2d');
+      if (ctx) {
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
+            datasets: [{
+              label: 'Parkhaus West',
+              data: [10, 20, 40, 70, 80, 85, 60, 65, 70, 80, 85, 70, 50, 30, 20],
+              borderWidth: 2,
+              borderColor: '#c6001a',
+              fill: false
+            }, {
+              label: 'Parkhaus Ost',
+              data: [5, 10, 30, 50, 55, 60, 45, 50, 55, 65, 70, 60, 45, 35, 25],
+              borderWidth: 2,
+              borderColor: '#a50016',
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  callback: function (value) {
+                    return value + '%';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Anreiseverhalten (DHBW) Chart
+      const commuteCtx = document.getElementById('commuteChart')?.getContext('2d');
+      if (commuteCtx) {
+        new Chart(commuteCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Zu Fuß', 'Auto', 'Fahrrad', 'Bus & Bahn'],
+            datasets: [{
+              data: [29, 44, 6, 10],
+              backgroundColor: ['#c6001a', '#a50016', '#e57373', '#fbc02d'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+      }
     };
   </script>
 </body>
