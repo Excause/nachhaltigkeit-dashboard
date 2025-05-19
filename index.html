@@ -71,42 +71,40 @@
     }
 
     async function fetchParkhausOstEvents() {
-      const apiKey = "Sy4G6TnzL5BLBMAurGvhvt62FZDFBj1Ws1ZGQ01SiBbsQNix";
-      const startTs = Date.now() - 60 * 60 * 1000;
-      const endTs = Date.now();
+      async function fetchTrafficSensorBernardRaw() {
+  const apiKey = "Sy4G6TnzL5BLBMAurGvhvt62FZDFBj1Ws1ZGQ01SiBbsQNix";
+  const startTs = Date.now() - 60 * 60 * 1000; // letzte Stunde
+  const endTs = Date.now();
 
-      const url = `https://apis.smartcity.hn/bildungscampus/iotplatform/trafficsensor/v1/authGroup/trafficsensor_bernard/entityId/3185fbc0-2bd8-11f0-8ba5-c32797a33353/valueType/timeseries?keys=crossingLineEvent&startTs=${startTs}&endTs=${endTs}&x-apikey=${apiKey}`;
+  const url = `https://apis.smartcity.hn/bildungscampus/iotplatform/trafficsensor/v1/authGroup/trafficsensor_bernard/entityId/3185fbc0-2bd8-11f0-8ba5-c32797a33353/valueType/timeseries?keys=crossingLineEvent&startTs=${startTs}&endTs=${endTs}&x-apikey=${apiKey}`;
 
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
+    const events = json.timeseries.crossingLineEvent.map(e => JSON.parse(e.value));
 
-        const allEvents = json.timeseries.crossingLineEvent.map(e => JSON.parse(e.value));
-        const parkhausOstEvents = allEvents.filter(e => e.lineName === "Parkhaus Ein- und Ausfahrt");
+    console.log("📦 ALLE EVENTS (letzte Stunde):", events);
 
-        const list = document.getElementById("parkhausOstList");
-        list.innerHTML = "";
+    const list = document.getElementById("parkhausOstList");
+    list.innerHTML = "";
 
-        if (parkhausOstEvents.length === 0) {
-          list.innerHTML = "<li>Keine Bewegungen in der letzten Stunde.</li>";
-          return;
-        }
+    events.slice(-10).reverse().forEach(e => {
+      const li = document.createElement("li");
+      const time = new Date(e.timestamp).toLocaleTimeString("de-DE");
+      li.textContent = `${time} – ${e.class} (${e.direction}) – ${e.lineName}`;
+      list.appendChild(li);
+    });
 
-        parkhausOstEvents.slice(-10).reverse().forEach(e => {
-          const li = document.createElement("li");
-          const date = new Date(e.timestamp).toLocaleTimeString("de-DE");
-          li.textContent = `${date} – ${e.class} (${e.direction})`;
-          list.appendChild(li);
-        });
-      } catch (err) {
-        console.error("Fehler beim Abrufen der Parkhausdaten:", err);
-      }
-    }
+  } catch (err) {
+    console.error("❌ Fehler beim Abrufen:", err);
+  }
+}
 
-    window.onload = function () {
-      showSection('home');
-      fetchParkhausOstEvents();
-      setInterval(fetchParkhausOstEvents, 5 * 60 * 1000);
+window.onload = function () {
+  showSection('home');
+  fetchTrafficSensorBernardRaw();
+  setInterval(fetchTrafficSensorBernardRaw, 5 * 60 * 1000);
+};
 
       // weitere Chart.js-Initialisierungen ...
     };
