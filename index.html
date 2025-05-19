@@ -75,7 +75,8 @@
       const startTs = Date.now() - 60 * 60 * 1000; // letzte Stunde
       const endTs = Date.now();
 
-      const url = `https://apis.smartcity.hn/bildungscampus/iotplatform/trafficsensor/v1/authGroup/trafficsensor_bernard/entityId/3185fbc0-2bd8-11f0-8ba5-c32797a33353/valueType/timeseries?keys=crossingLineEvent&startTs=${startTs}&endTs=${endTs}&x-apikey=${apiKey}`;
+      const url = "http://localhost:3000/api/events";
+
 
       try {
         const res = await fetch(url);
